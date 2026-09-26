@@ -3,4 +3,4 @@ data/**
 !data/.gitkeep
 
 # Python
-___pycache__/
+__pycache__/
