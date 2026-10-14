@@ -35,7 +35,7 @@ flowchart LR
 
 - Ingestão dos três arquivos sem alterações destrutivas.
 - Persistência em Delta com schema inicial e metadados de ingestão.
-- Campos técnicos: `_source_file`, `_ingested_at`, `_ingestion_batch_id` e `_record_hash`.
+- Campos de metadados técnicos: `_source_file`, `_ingested_at`, `_ingestion_batch_id` e `_record_hash`.
 - Controles de contagem, schema e duplicidade técnica.
 
 ### Silver
@@ -147,7 +147,7 @@ Os arquivos completos do Kaggle não serão versionados. O repositório manterá
 ## 7. Cronograma end-to-end
 
 | Fase | Duração | Entregas técnicas | Publicação sugerida |
-|---|---:|---|---|
+| --- | ---: | --- | --- |
 | 1. Fundação | Semana 1 | Repositório, ambiente, catálogo, volumes, amostra e desenho da arquitetura | Apresentação do problema e arquitetura |
 | 2. Bronze | Semana 2 | Ingestão dos três arquivos, Delta e metadados técnicos | Ingestão rastreável e Delta Lake |
 | 3. Silver | Semana 3 | Limpeza, schemas, chaves e qualidade de dados | Decisões de qualidade e valores sentinela |
