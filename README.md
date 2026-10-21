@@ -59,13 +59,23 @@ Requisitos: Python 3.11 e [uv](https://docs.astral.sh/uv/). O ambiente local ser
 ```bash
 uv sync
 uv run python -c "import credit_risk_lakehouse; print('Ambiente pronto')"
-uv run ruff check .
+uv run ruff check src
 ```
 
-As dependências de modelagem serão instaladas quando essa etapa começar. Não é necessário instalar Spark localmente para iniciar o laboratório.
+As dependências de modelagem serão instaladas quando essa etapa começar. PySpark
+é usado como dependência de desenvolvimento para verificações locais, mas o
+processamento Spark e Delta continua sendo executado no Databricks.
 
 ## Estado do projeto
 
-**Fundação em preparação.** Ainda não há pipelines, modelos treinados ou resultados publicados.
+**Bronze implementada; Silver é a etapa atual.**
 
-Próximo marco: examinar os três arquivos, confirmar schemas e cardinalidade das chaves e registrar os valores sentinela antes de implementar a ingestão Bronze.
+- A Bronze ingere `application_train`, `bureau` e `previous_application` como
+  tabelas Delta brutas, preservando os campos de origem como strings e
+  adicionando `_source_path` e `_ingested_at`.
+- O notebook exploratório e o job Python oferecem os modos `bootstrap`
+  (provisiona, baixa e recria a Bronze) e `rebuild` (valida o landing existente
+  e recria a Bronze).
+
+Próximo marco: implementar a Silver com tipagem explícita, valores sentinela e
+regras de qualidade.

@@ -33,10 +33,14 @@ flowchart LR
 
 ### Bronze
 
-- Ingestão dos três arquivos sem alterações destrutivas.
-- Persistência em Delta com schema inicial e metadados de ingestão.
-- Campos de metadados técnicos: `_source_file`, `_ingested_at`, `_ingestion_batch_id` e `_record_hash`.
-- Controles de contagem, schema e duplicidade técnica.
+- Ingestão dos três arquivos como Delta bruto, preservando os campos de origem
+  como strings.
+- Metadados técnicos implementados: `_source_path` e `_ingested_at`.
+- Implementação de notebook exploratório e job Python para
+  `bootstrap` e `rebuild`.
+- Validação dos arquivos do landing e de tabela não vazia após a carga.
+- O teste integrado no Lakeflow Jobs Serverless depende da configuração externa
+  da credencial da API Kaggle.
 
 ### Silver
 
@@ -149,8 +153,8 @@ Os arquivos completos do Kaggle não serão versionados. O repositório manterá
 | Fase | Duração | Entregas técnicas | Publicação sugerida |
 | --- | ---: | --- | --- |
 | 1. Fundação | Semana 1 | Repositório, ambiente, catálogo, volumes, amostra e desenho da arquitetura | Apresentação do problema e arquitetura |
-| 2. Bronze | Semana 2 | Ingestão dos três arquivos, Delta e metadados técnicos | Ingestão rastreável e Delta Lake |
-| 3. Silver | Semana 3 | Limpeza, schemas, chaves e qualidade de dados | Decisões de qualidade e valores sentinela |
+| 2. Bronze (concluída) | Semana 2 | Ingestão dos três arquivos, Delta e metadados técnicos | Ingestão rastreável e Delta Lake |
+| 3. Silver (atual) | Semana 3 | Limpeza, schemas, chaves e qualidade de dados | Decisões de qualidade e valores sentinela |
 | 4. Gold | Semana 4 | Agregações relacionais e feature table por solicitação | Arquitetura medalhão e engenharia de atributos |
 | 5. Baseline | Semana 5 | Regressão logística, split e tracking no MLflow | Baseline, métricas e prevenção de leakage |
 | 6. Modelo concorrente | Semana 6 | Modelo de árvores, calibração e análise por segmentos | Por que ROC-AUC não basta em risco de crédito |
