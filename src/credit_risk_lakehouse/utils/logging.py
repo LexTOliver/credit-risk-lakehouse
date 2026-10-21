@@ -3,11 +3,16 @@ from __future__ import annotations
 import logging
 
 
-def setup_logging(level: int = logging.INFO) -> None:
+def setup_logging(level_name: str = "INFO") -> None:
     """Set up logging configuration."""
+    level = getattr(logging, level_name.upper())
+
+    if not isinstance(level, int):
+        raise ValueError(f"Invalid log level: {level_name}")
+
     logging.basicConfig(
         level=level,
-        format="%(asctime)s [%(levelname)s] %(name)s - %(message)s",
+        format="%(asctime)s | %(name)s | %(levelname)s | %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S",
         force=False,
     )

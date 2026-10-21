@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 import argparse
+import os
 import time
 from pathlib import Path
 
 import kagglehub  # type: ignore[import-untyped]
 from pyspark.sql import SparkSession
 
-from credit_risk_lakehouse.utils.logging import get_logger
+from credit_risk_lakehouse.utils.logging import get_logger, setup_logging
 
 LOGGER = get_logger(__name__)
 
@@ -156,6 +157,7 @@ def ingest_bronze(
 def main() -> None:
     """Main entry point for the script."""
     args = parse_args()
+    setup_logging(level_name=os.getenv("LOG_LEVEL", "INFO"))
 
     # Create a Spark session
     spark = SparkSession.builder.appName("Ingest Bronze Data").getOrCreate()
