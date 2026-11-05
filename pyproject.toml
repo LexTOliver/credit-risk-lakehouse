@@ -35,3 +35,6 @@ select = ["E", "F", "I", "B", "UP"]
 python_version = "3.11"
 strict = true
 packages = ["credit_risk_lakehouse"]
+
+[tool.databricks.environment]
+environment_version = "6"
